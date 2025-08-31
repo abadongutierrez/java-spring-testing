@@ -1,4 +1,4 @@
-package com.jabaddon.learning.java_spring_testing.testlifecycle;
+package com.jabaddon.learning.java_spring_testing.examples;
 
 import org.junit.jupiter.api.*;
 
@@ -35,5 +35,17 @@ public class LifecycleExampleTest {
     @Test
     void exampleTest2() {
         System.out.println("\t> Running example test 2...");
+    }
+
+    @Test
+    @Disabled("This test is disabled for now")
+    void exampleTest3() {
+        System.out.println("\t> Running example test 3...");
+    }
+
+    @Test
+    @DisplayName("This is an interesting test that does bla bla bla bla bla ...")
+    void exampleTest4() {
+        System.out.println("\t> Running example test 4...");
     }
 }
