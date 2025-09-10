@@ -1,7 +1,8 @@
 package com.jabaddon.learning.java_spring_testing.app.application;
 
-import com.jabaddon.learning.java_spring_testing.app.domain.model.Activity;
-import com.jabaddon.learning.java_spring_testing.app.domain.repository.ActivityDomainRepository;
+import com.jabaddon.learning.java_spring_testing.app.domain.services.NotificationDomainService;
+import com.jabaddon.learning.java_spring_testing.app.domain.models.Activity;
+import com.jabaddon.learning.java_spring_testing.app.domain.repositories.ActivityDomainRepository;
 import com.jabaddon.learning.java_spring_testing.utils.TimeTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,13 @@ import java.util.Optional;
 public class ActivityService {
     
     private final ActivityDomainRepository activityRepository;
+    private final NotificationDomainService notificationService;
     
     @Autowired
-    public ActivityService(ActivityDomainRepository activityRepository) {
+    public ActivityService(ActivityDomainRepository activityRepository, 
+                          NotificationDomainService emailNotificationService) {
         this.activityRepository = activityRepository;
+        this.notificationService = emailNotificationService;
     }
     
     public List<ActivityDTO> getAllActivities() {
@@ -59,7 +63,17 @@ public class ActivityService {
     }
 
     public void deleteActivity(Long id) {
+        // Fetch activity before deletion to send notification
+        Optional<Activity> optionalActivity = activityRepository.findById(id);
+        if (optionalActivity.isEmpty()) {
+            throw new NoSuchElementException("Activity not found");
+        }
+        
+        Activity activity = optionalActivity.get();
         activityRepository.deleteById(id);
+        
+        // Send email notification after successful deletion
+        notificationService.sendActivityDeletedNotification(activity);
     }
 
     private ActivityDTO toDTO(Activity activity) {

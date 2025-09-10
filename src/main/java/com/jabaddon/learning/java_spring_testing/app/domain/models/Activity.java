@@ -1,4 +1,4 @@
-package com.jabaddon.learning.java_spring_testing.app.domain.model;
+package com.jabaddon.learning.java_spring_testing.app.domain.models;
 
 import java.time.LocalDate;
 

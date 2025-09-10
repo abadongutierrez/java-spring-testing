@@ -1,16 +1,16 @@
 package com.jabaddon.learning.java_spring_testing.app.infra.persistence.repositories;
 
-import com.jabaddon.learning.java_spring_testing.app.domain.model.Activity;
-import com.jabaddon.learning.java_spring_testing.app.domain.repository.ActivityDomainRepository;
+import com.jabaddon.learning.java_spring_testing.app.domain.models.Activity;
+import com.jabaddon.learning.java_spring_testing.app.domain.repositories.ActivityDomainRepository;
 import com.jabaddon.learning.java_spring_testing.app.infra.persistence.entities.ActivityJpaEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class ActivityDomainRepositoryImpl implements ActivityDomainRepository {
     private final ActivityRepository activityRepository;
 
