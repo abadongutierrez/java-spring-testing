@@ -26,7 +26,7 @@ public class BetterAssertionsDemoTest {
         @Test
         @DisplayName("String equality and content checks")
         void stringAssertions() {
-            String activityName = "Morning Run";
+            String activityName = "Morning Ru";
             
             // JUnit
             assertEquals("Morning Run", activityName);

@@ -14,6 +14,7 @@ public class TimeTranslatorDynamicTest {
 
     @TestFactory
     Stream<DynamicTest> dynamicTests() {
+        // db
         return Stream.of(List.of("2m", 2L), List.of("3m", 3L), List.of("1d", 1440L))
                 .map(v ->
                         dynamicTest(v.get(0) + " should be " + v.get(1) + " minutes", () -> {
